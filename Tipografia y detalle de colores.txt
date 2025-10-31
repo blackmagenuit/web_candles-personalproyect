@@ -1,0 +1,37 @@
+Según el código actual, estoy usando las siguientes tipografías:
+
+Tipografías actuales en el proyecto:
+Playfair Display (font-title)
+
+Uso: Títulos principales y nombres de productos
+Características: Serif elegante, diseñada para títulos
+Pesos: 400, 500, 600, 700 + itálica 400
+Source Sans Pro (font-sans)
+
+Uso: Texto del cuerpo, navegación, botones
+Características: Sans-serif limpia y legible
+Pesos: 300, 400, 500, 600, 700
+Cormorant Garamond (font-elegant)
+
+Uso: Subtítulos y texto descriptivo elegante
+Características: Serif clásica y refinada
+Pesos: 300, 400, 500, 600 + itálicas 300, 400
+Configuración en Tailwind:
+Aplicación en el diseño:
+Títulos principales (h1, h2): font-title (Playfair Display)
+Texto general: font-sans (Source Sans Pro)
+Texto descriptivo elegante: font-elegant (Cormorant Garamond)
+Estas tipografías crean una jerarquía visual elegante que combina bien con el tema artesanal de velas, mezclando la sofisticación de las serif con la legibilidad de las sans-serif.
+fontFamily: { 
+  sans: ["Source Sans Pro", "ui-sans-serif", "system-ui"],
+  title: ["Playfair Display", "serif"],
+  elegant: ["Cormorant Garamond", "serif"]
+}
+
+Paleta de colores
+| Color           | HEX       | RGB                |
+| :-------------- | :-------- | :----------------- |
+| Blanco grisáceo | `#f5f5f5` | rgb(245, 245, 245) |
+| Rosa pálido     | `#ebd6d1` | rgb(235, 214, 209) |
+| Beige suave     | `#d7c6b3` | rgb(215, 198, 179) |
+| Rosa viejo      | `#d9b4ac` | rgb(217, 180, 172) |
