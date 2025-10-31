@@ -61,7 +61,6 @@
     } else {
       document.documentElement.classList.remove('dark')
     }
-    }
   </script>
   <style>
     /* Suaviza el scroll y selection */
@@ -91,12 +90,31 @@
           </button>
           <!-- Cart Counter -->
           <div id="cartCounter" class="hidden relative flex items-center gap-2">
-            <span class="inline-flex items-center gap-1 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm">
+            <button id="cartToggle" class="inline-flex items-center gap-1 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900">
               🛒 <span id="cartCount">0</span>
-            </span>
+            </button>
             <button id="clearCartBtn" class="inline-flex items-center gap-1 rounded-xl border border-red-300 dark:border-red-700 px-2 py-1 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
               🗑️ Vaciar
             </button>
+            
+            <!-- Cart Dropdown -->
+            <div id="cartDropdown" class="hidden absolute top-full right-0 mt-2 w-80 bg-white dark:bg-slate-950 border border-rosatierra-200 dark:border-slate-700 rounded-xl shadow-lg z-50">
+              <div class="p-4">
+                <h3 class="font-semibold text-lg mb-3 text-rosatierra-800 dark:text-slate-100">Carrito de Compras</h3>
+                <div id="cartItems" class="space-y-2 max-h-60 overflow-y-auto">
+                  <!-- Cart items will be inserted here -->
+                </div>
+                <div id="emptyCart" class="text-center py-4 text-slate-500 dark:text-slate-400">
+                  El carrito está vacío
+                </div>
+                <div id="cartTotal" class="hidden mt-3 pt-3 border-t border-rosatierra-200 dark:border-slate-700">
+                  <div class="flex justify-between items-center font-semibold">
+                    <span>Total:</span>
+                    <span id="totalAmount">$0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <a href="#productos" class="hidden sm:inline-flex items-center rounded-xl bg-rosatierra-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Comprar</a>
         </div>
@@ -381,6 +399,44 @@
       }
     }
 
+    function updateCartDropdown() {
+      const cartItems = document.getElementById('cartItems');
+      const emptyCart = document.getElementById('emptyCart');
+      const cartTotal = document.getElementById('cartTotal');
+      const totalAmount = document.getElementById('totalAmount');
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '';
+        emptyCart.classList.remove('hidden');
+        cartTotal.classList.add('hidden');
+      } else {
+        emptyCart.classList.add('hidden');
+        cartTotal.classList.remove('hidden');
+
+        // Calculate total
+        let total = 0;
+        
+        cartItems.innerHTML = cart.map((item, index) => {
+          const price = parseFloat(item.price.replace('$', ''));
+          total += price;
+          
+          return `
+            <div class="flex justify-between items-center p-2 bg-rosatierra-50 dark:bg-slate-800 rounded-lg">
+              <div class="flex-1">
+                <p class="font-medium text-sm">${item.name}</p>
+                <p class="text-xs text-rosatierra-600 dark:text-slate-400">${item.price}</p>
+              </div>
+              <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700 p-1">
+                ✕
+              </button>
+            </div>
+          `;
+        }).join('');
+
+        totalAmount.textContent = `$${total.toFixed(2)}`;
+      }
+    }
+
     function showNotification(message = '¡Producto agregado al carrito!') {
       const notification = document.getElementById('cartNotification');
       const notificationText = notification.querySelector('p');
@@ -396,9 +452,22 @@
       cart.push({ name: productName, price: price });
       cartCount++;
       updateCartCounter();
+      updateCartDropdown();
       showNotification();
       
       console.log(`Producto agregado: ${productName} - ${price}`);
+      console.log('Carrito actual:', cart);
+    }
+
+    function removeFromCart(index) {
+      const removedItem = cart[index];
+      cart.splice(index, 1);
+      cartCount--;
+      updateCartCounter();
+      updateCartDropdown();
+      showNotification(`${removedItem.name} eliminado del carrito`);
+      
+      console.log(`Producto eliminado: ${removedItem.name}`);
       console.log('Carrito actual:', cart);
     }
 
@@ -406,6 +475,7 @@
       cart = [];
       cartCount = 0;
       updateCartCounter();
+      updateCartDropdown();
       showNotification('¡Carrito vaciado!');
       
       console.log('Carrito vaciado');
@@ -432,6 +502,28 @@
           clearCart();
         }
       });
+
+      // Cart toggle functionality
+      const cartToggle = document.getElementById('cartToggle');
+      const cartDropdown = document.getElementById('cartDropdown');
+      
+      cartToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        cartDropdown.classList.toggle('hidden');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function() {
+        cartDropdown.classList.add('hidden');
+      });
+
+      // Prevent dropdown from closing when clicking inside it
+      cartDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+
+      // Initialize cart display
+      updateCartDropdown();
     });
 
     // Toggle tema
