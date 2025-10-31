@@ -3,6 +3,9 @@
 ## Project Description
 This project is a web template for a candle-themed website built with Tailwind CSS.
 
+## Live Demo
+Check out the live demo: [GitHub Pages Link](https://blackmagenuit.github.io/web_candles-personalproyect/)
+
 ## Technologies Used
 - HTML
 - Tailwind CSS
