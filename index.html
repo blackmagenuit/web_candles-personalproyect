@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es" class="h-full scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aura by Jaz - Velas Artesanales</title>
+  <meta name="description" content="Velas aromáticas artesanales hechas a mano. Crea ambientes únicos con nuestras velas premium." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN (modo play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Config Tailwind opcional
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          colors: {
+            blackmagenuit: {
+              50:  "#f0f7ff",
+              100: "#dceeff",
+              200: "#b5dbff",
+              300: "#86c4ff",
+              400: "#56a7ff",
+              500: "#2f8aff",
+              600: "#1b6fe6",
+              700: "#1657b4",
+              800: "#123f82",
+              900: "#0d2a57"
+            }
+          }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <script>
+    // Persistir preferencia de modo oscuro
+    const themeStorageKey = 'theme:color-scheme'
+    const saved = localStorage.getItem(themeStorageKey)
+    if (
+      saved === 'dark' ||
+      (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark')
+    }
+  </script>
+  <style>
+    /* Suaviza el scroll y selection */
+    ::selection { background: #2f8aff22; }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-950/60 border-b border-slate-200/60 dark:border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#" class="flex items-center gap-2 font-extrabold tracking-tight text-xl">
+          <img src="img/LOGO_AURABYJAZ.png" alt="Aura by Jaz Logo" class="h-10 w-auto">
+          <span>Aura by Jaz</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#productos" class="hover:text-blackmagenuit-600">Productos</a>
+          <a href="#precios" class="hover:text-blackmagenuit-600">Precios</a>
+          <a href="#faq" class="hover:text-blackmagenuit-600">FAQ</a>
+          <a href="#contacto" class="hover:text-blackmagenuit-600">Contacto</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-900">
+            <span class="i-sun hidden dark:inline">🌙</span>
+            <span class="i-moon inline dark:hidden">☀️</span>
+            <span class="sr-only">Cambiar tema</span>
+          </button>
+          <a href="#cta" class="hidden sm:inline-flex items-center rounded-xl bg-blackmagenuit-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-blackmagenuit-700 focus:outline-none focus:ring-2 focus:ring-blackmagenuit-500">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-blackmagenuit-50 to-white dark:from-slate-900 dark:to-slate-950"></div>
+    <img src="img/Banner_frase.png" alt="Banner Aura by Jaz" class="absolute inset-0 w-full h-full object-cover opacity-10 -z-5">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-blackmagenuit-200/60 bg-white/70 dark:bg-slate-950/50 px-3 py-1 text-xs font-medium text-blackmagenuit-700 dark:text-blackmagenuit-200">
+            <span class="h-2 w-2 rounded-full bg-blackmagenuit-500 inline-block"></span>
+            🕯️ Velas Artesanales
+          </span>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+            Crea ambientes <span class="text-blackmagenuit-600">mágicos</span> con nuestras velas
+          </h1>
+          <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-prose">
+            Velas aromáticas hechas a mano con ceras naturales y fragancias premium. Perfectas para relajación, meditación y crear momentos especiales.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a id="cta" href="#productos" class="inline-flex items-center rounded-xl bg-blackmagenuit-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-blackmagenuit-700 focus:outline-none focus:ring-2 focus:ring-blackmagenuit-500">Ver Productos</a>
+            <a href="#precios" class="inline-flex items-center rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-900">Ver Precios</a>
+          </div>
+          <div class="mt-6 flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-1">🌿 <span>100% Natural</span></div>
+            <div class="flex items-center gap-1">✋ <span>Hecho a Mano</span></div>
+            <div class="flex items-center gap-1">🚚 <span>Envío Gratis</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="relative p-1 rounded-2xl bg-gradient-to-tr from-blackmagenuit-200 to-blackmagenuit-500/40 dark:from-blackmagenuit-900/40 dark:to-blackmagenuit-600/20">
+            <div class="rounded-xl bg-white dark:bg-slate-900 overflow-hidden shadow-xl">
+              <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Aura by Jaz" class="w-full h-48 object-cover">
+              <div class="p-4 text-center">
+                <h3 class="text-lg font-semibold text-blackmagenuit-600">Vela Relax</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300">Relajación y calma</p>
+                <p class="text-xl font-bold mt-2">$25.00</p>
+              </div>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Nuestra vela más popular para crear un ambiente relajante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos -->
+  <section id="productos" class="py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Nuestros Productos</h2>
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Vela 1 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Relax</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Aromática relajante</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$25.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+        <!-- Vela 2 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/545365265_17855113215531051_4961248560403902871_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Energía</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Revitalizante</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$28.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+        <!-- Vela 3 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/547758411_17855354748531051_6656419321469229698_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Serenidad</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Paz interior</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$30.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+
+        <!-- Vela 4 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/548038925_17855330460531051_9195035416595380747_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Amor</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Romance y pasión</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$32.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+
+        <!-- Vela 5 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/548545921_17855376558531051_6872042298536463752_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Abundancia</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Prosperidad</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$35.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+
+        <!-- Vela 6 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/551869002_17856317652531051_6553706410933271805_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Protección</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Energía protectora</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$30.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+
+        <!-- Vela 7 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/553726112_17856487059531051_2428140240481272521_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Equilibrio</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Armonía total</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$28.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+
+        <!-- Vela 8 -->
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
+          <img src="img/560103923_17858193582531051_8352812995069567662_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Vela Inspiración</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Creatividad pura</p>
+            <p class="text-blackmagenuit-600 font-bold mt-2">$33.00</p>
+            <button class="w-full mt-3 bg-blackmagenuit-600 text-white py-2 px-4 rounded-xl hover:bg-blackmagenuit-700 transition-colors">Agregar al Carrito</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios -->
+  <section id="precios" class="py-16 sm:py-20 bg-slate-50 dark:bg-slate-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Nuestros Paquetes</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Paquete Individual -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm bg-white dark:bg-slate-950">
+          <h4 class="text-lg font-semibold">Vela Individual</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Perfecta para probar.</p>
+          <p class="mt-4 text-3xl font-extrabold">$15</p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>✔️ 1 Vela aromática</li>
+            <li>✔️ 40+ horas de duración</li>
+            <li>✔️ Envío gratis</li>
+          </ul>
+          <a href="#" class="mt-6 inline-flex w-full justify-center rounded-xl bg-slate-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-slate-900 hover:opacity-90">Comprar</a>
+        </div>
+        <!-- Pack Trio -->
+        <div class="rounded-2xl border-2 border-blackmagenuit-600 p-6 shadow-sm bg-white dark:bg-slate-950">
+          <div class="inline-flex items-center gap-2 rounded-full bg-blackmagenuit-100 text-blackmagenuit-800 px-2 py-0.5 text-xs font-semibold">Más Popular</div>
+          <h4 class="mt-2 text-lg font-semibold">Pack Trio</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">El favorito de nuestros clientes.</p>
+          <p class="mt-4 text-3xl font-extrabold">$39<span class="text-base font-medium text-slate-500 line-through ml-2">$45</span></p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>✔️ 3 Velas diferentes</li>
+            <li>✔️ Fragancias premium</li>
+            <li>✔️ Caja de regalo incluida</li>
+          </ul>
+          <a href="#" class="mt-6 inline-flex w-full justify-center rounded-xl bg-blackmagenuit-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blackmagenuit-700">Comprar</a>
+        </div>
+        <!-- Colección Premium -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm bg-white dark:bg-slate-950">
+          <h4 class="text-lg font-semibold">Colección Premium</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">La experiencia completa.</p>
+          <p class="mt-4 text-3xl font-extrabold">$85<span class="text-base font-medium text-slate-500 line-through ml-2">$100</span></p>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>✔️ 6 Velas artesanales</li>
+            <li>✔️ Portavelas de cerámica</li>
+            <li>✔️ Accesorios premium</li>
+          </ul>
+          <a href="#" class="mt-6 inline-flex w-full justify-center rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-900">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold">Preguntas frecuentes</h2>
+      <div class="mt-6 divide-y divide-slate-200 dark:divide-slate-800">
+        <details class="group py-4">
+          <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold">
+            ¿Cuánto duran las velas? <span class="transition group-open:rotate-180">⌄</span>
+          </summary>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Nuestras velas están diseñadas para durar entre 40-60 horas dependiendo del tamaño y uso.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold">
+            ¿Son hechas con materiales naturales? <span class="transition group-open:rotate-180">⌄</span>
+          </summary>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Sí. Usamos 100% cera de soja natural, mechas de algodón y aceites esenciales premium.</p>
+        </details>
+        <details class="group py-4">
+          <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold">
+            ¿Hacen envíos a domicilio? <span class="transition group-open:rotate-180">⌄</span>
+          </summary>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Sí, enviamos gratis a todo el país. Los pedidos llegan en 3-5 días hábiles.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-16 sm:py-20 bg-slate-50 dark:bg-slate-900/40">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-950">
+        <h2 class="text-xl font-bold">¿Tienes alguna pregunta?</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Contáctanos para pedidos personalizados o consultas sobre nuestros productos.</p>
+        <form class="mt-4 grid gap-4">
+          <div>
+            <label class="block text-sm font-medium">Nombre</label>
+            <input type="text" class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blackmagenuit-500" placeholder="Tu nombre" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Email</label>
+            <input type="email" class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blackmagenuit-500" placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Mensaje</label>
+            <textarea rows="4" class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blackmagenuit-500" placeholder="Cuéntanos qué fragancias prefieres o si necesitas un pedido personalizado..."></textarea>
+          </div>
+          <button type="submit" class="inline-flex justify-center rounded-xl bg-blackmagenuit-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blackmagenuit-700">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
+        <p>© <span id="year"></span> <a href="https://github.com/blackmagenuit" class="hover:text-blackmagenuit-600" target="_blank" rel="noopener noreferrer">blackmagenuit</a>. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-4">
+          <a class="hover:text-blackmagenuit-600" href="#">Términos</a>
+          <a class="hover:text-blackmagenuit-600" href="#">Privacidad</a>
+          <a class="hover:text-blackmagenuit-600" href="#">Soporte</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle tema
+    const btn = document.getElementById('themeToggle')
+    btn?.addEventListener('click', () => {
+      const root = document.documentElement
+      const isDark = root.classList.toggle('dark')
+      localStorage.setItem('theme:color-scheme', isDark ? 'dark' : 'light')
+    })
+
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear()
+  </script>
+</body>
+</html>
