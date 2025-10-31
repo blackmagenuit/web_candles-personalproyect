@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
   <!-- Tailwind CDN (modo play) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -15,7 +17,10 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          fontFamily: { 
+            sans: ["Didact Gothic", "ui-sans-serif", "system-ui"],
+            title: ["Tangerine", "cursive"]
+          },
           colors: {
             rosatierra: {
               50:  "#f5f5f5", // Blanco grisáceo
@@ -48,7 +53,7 @@
     }
   </script>
   <script>
-    // Persistir preferencia de modo claro/oscuro
+    // modo claro/oscuro
     const themeStorageKey = 'theme:color-scheme'
     const saved = localStorage.getItem(themeStorageKey)
     if (saved === 'dark') {
@@ -68,7 +73,7 @@
   <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-rosatierra-50/60 dark:supports-[backdrop-filter]:bg-slate-950/60 border-b border-rosatierra-100/60 dark:border-slate-800/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
-        <a href="#" class="flex items-center gap-2 font-extrabold tracking-tight text-xl">
+        <a href="#" class="flex items-center gap-2 font-extrabold tracking-tight text-xl font-title text-2xl">
           <img src="img/LOGO_AURABYJAZ.png" alt="Aura by Jaz Logo" class="h-10 w-auto">
           <span>Aura by Jaz</span>
         </a>
@@ -102,7 +107,7 @@
             <span class="h-2 w-2 rounded-full bg-rosatierra-300 inline-block"></span>
             🕯️ Velas Artesanales
           </span>
-          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-rosatierra-800">
+          <h1 class="mt-4 text-5xl sm:text-7xl font-extrabold tracking-tight leading-tight text-rosatierra-800 font-title">
             Crea ambientes <span class="text-rosatierra-600">mágicos</span> con nuestras velas
           </h1>
           <p class="mt-4 text-rosatierra-700 dark:text-slate-300 max-w-prose">
@@ -123,7 +128,7 @@
             <div class="rounded-xl bg-white dark:bg-slate-900 overflow-hidden shadow-xl">
               <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Aura by Jaz" class="w-full h-48 object-cover">
               <div class="p-4 text-center">
-                <h3 class="text-lg font-semibold text-rosatierra-600">Vela Relax</h3>
+                <h3 class="text-2xl font-semibold text-rosatierra-600 font-title">Vela Relax</h3>
                 <p class="text-sm text-rosatierra-600 dark:text-slate-300">Relajación y calma</p>
                 <p class="text-xl font-bold mt-2 text-rosatierra-700">$25.00</p>
               </div>
@@ -138,13 +143,13 @@
   <!-- Productos -->
   <section id="productos" class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12 text-rosatierra-800">Nuestros Productos</h2>
+      <h2 class="text-4xl font-bold text-center mb-12 text-rosatierra-800 font-title">Nuestros Productos</h2>
       <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Vela 1 -->
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Relax</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Relax</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Aromática relajante</p>
             <p class="text-rosatierra-600 font-bold mt-2">$25.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -154,7 +159,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/545365265_17855113215531051_4961248560403902871_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Energía</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Energía</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Revitalizante</p>
             <p class="text-rosatierra-600 font-bold mt-2">$28.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -164,7 +169,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/547758411_17855354748531051_6656419321469229698_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Serenidad</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Serenidad</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Paz interior</p>
             <p class="text-rosatierra-600 font-bold mt-2">$30.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -175,7 +180,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/548038925_17855330460531051_9195035416595380747_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Amor</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Amor</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Romance y pasión</p>
             <p class="text-rosatierra-600 font-bold mt-2">$32.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -186,7 +191,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/548545921_17855376558531051_6872042298536463752_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Abundancia</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Abundancia</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Prosperidad</p>
             <p class="text-rosatierra-600 font-bold mt-2">$35.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -197,7 +202,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/551869002_17856317652531051_6553706410933271805_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Protección</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Protección</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Energía protectora</p>
             <p class="text-rosatierra-600 font-bold mt-2">$30.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -208,7 +213,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/553726112_17856487059531051_2428140240481272521_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Equilibrio</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Equilibrio</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Armonía total</p>
             <p class="text-rosatierra-600 font-bold mt-2">$28.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -219,7 +224,7 @@
         <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950">
           <img src="img/560103923_17858193582531051_8352812995069567662_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4">
-            <h3 class="font-semibold text-lg text-rosatierra-700">Vela Inspiración</h3>
+            <h3 class="font-semibold text-xl text-rosatierra-700 font-title">Vela Inspiración</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Creatividad pura</p>
             <p class="text-rosatierra-600 font-bold mt-2">$33.00</p>
             <button class="w-full mt-3 bg-rosatierra-600 text-white py-2 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors">Agregar al Carrito</button>
@@ -232,11 +237,11 @@
   <!-- Precios -->
   <section id="precios" class="py-16 sm:py-20 bg-rosatierra-100 dark:bg-slate-900/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12 text-rosatierra-800">Nuestros Paquetes</h2>
+      <h2 class="text-4xl font-bold text-center mb-12 text-rosatierra-800 font-title">Nuestros Paquetes</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <!-- Paquete Individual -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-800 p-6 shadow-sm bg-white dark:bg-slate-950">
-          <h4 class="text-lg font-semibold text-rosatierra-800">Vela Individual</h4>
+          <h4 class="text-2xl font-semibold text-rosatierra-800 font-title">Vela Individual</h4>
           <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">Perfecta para probar.</p>
           <p class="mt-4 text-3xl font-extrabold text-rosatierra-700">$15</p>
           <ul class="mt-4 space-y-2 text-sm text-rosatierra-700">
@@ -249,7 +254,7 @@
         <!-- Pack Trio -->
         <div class="rounded-2xl border-2 border-rosatierra-600 p-6 shadow-sm bg-white dark:bg-slate-950">
           <div class="inline-flex items-center gap-2 rounded-full bg-rosatierra-200 text-rosatierra-800 px-2 py-0.5 text-xs font-semibold">Más Popular</div>
-          <h4 class="mt-2 text-lg font-semibold text-rosatierra-800">Pack Trio</h4>
+          <h4 class="mt-2 text-2xl font-semibold text-rosatierra-800 font-title">Pack Trio</h4>
           <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">El favorito de nuestros clientes.</p>
           <p class="mt-4 text-3xl font-extrabold text-rosatierra-700">$39<span class="text-base font-medium text-rosatierra-500 line-through ml-2">$45</span></p>
           <ul class="mt-4 space-y-2 text-sm text-rosatierra-700">
@@ -261,7 +266,7 @@
         </div>
         <!-- Colección Premium -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-800 p-6 shadow-sm bg-white dark:bg-slate-950">
-          <h4 class="text-lg font-semibold text-rosatierra-800">Colección Premium</h4>
+          <h4 class="text-2xl font-semibold text-rosatierra-800 font-title">Colección Premium</h4>
           <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-1">La experiencia completa.</p>
           <p class="mt-4 text-3xl font-extrabold text-rosatierra-700">$85<span class="text-base font-medium text-rosatierra-500 line-through ml-2">$100</span></p>
           <ul class="mt-4 space-y-2 text-sm text-rosatierra-700">
@@ -278,7 +283,7 @@
   <!-- FAQ -->
   <section id="faq" class="py-16 sm:py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-rosatierra-800">Preguntas frecuentes</h2>
+      <h2 class="text-3xl font-bold text-rosatierra-800 font-title">Preguntas frecuentes</h2>
       <div class="mt-6 divide-y divide-rosatierra-200 dark:divide-slate-800">
         <details class="group py-4">
           <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-rosatierra-700">
@@ -306,7 +311,7 @@
   <section id="contacto" class="py-16 sm:py-20 bg-rosatierra-100 dark:bg-slate-900/40">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-950">
-        <h2 class="text-xl font-bold text-rosatierra-800">¿Tienes alguna pregunta?</h2>
+        <h2 class="text-2xl font-bold text-rosatierra-800 font-title">¿Tienes alguna pregunta?</h2>
         <p class="text-sm text-rosatierra-600 dark:text-slate-300 mt-2">Contáctanos para pedidos personalizados o consultas sobre nuestros productos.</p>
         <form class="mt-4 grid gap-4">
           <div>
