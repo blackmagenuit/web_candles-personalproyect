@@ -89,11 +89,27 @@
             <span class="i-moon inline dark:hidden">☀️</span>
             <span class="sr-only">Cambiar tema</span>
           </button>
-          <a href="#cta" class="hidden sm:inline-flex items-center rounded-xl bg-rosatierra-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Comprar</a>
+          <!-- Cart Counter -->
+          <div id="cartCounter" class="hidden relative flex items-center gap-2">
+            <span class="inline-flex items-center gap-1 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm">
+              🛒 <span id="cartCount">0</span>
+            </span>
+            <button id="clearCartBtn" class="inline-flex items-center gap-1 rounded-xl border border-red-300 dark:border-red-700 px-2 py-1 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+              🗑️ Vaciar
+            </button>
+          </div>
+          <a href="#productos" class="hidden sm:inline-flex items-center rounded-xl bg-rosatierra-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Comprar</a>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Cart Notification -->
+  <div id="cartNotification" class="fixed top-20 right-4 z-50 hidden">
+    <div class="bg-rosatierra-600 text-white px-4 py-2 rounded-xl shadow-lg">
+      <p class="text-sm font-semibold">¡Producto agregado al carrito!</p>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section class="relative overflow-hidden">
@@ -114,7 +130,7 @@
             Velas aromáticas hechas a mano con ceras naturales y fragancias premium. Perfectas para relajación, meditación y crear momentos especiales.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a id="cta" href="#productos" class="inline-flex items-center rounded-xl bg-rosatierra-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Ver Productos</a>
+            <a href="#productos" class="inline-flex items-center rounded-xl bg-rosatierra-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Ver Productos</a>
             <a href="#precios" class="inline-flex items-center rounded-xl border border-rosatierra-200 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold hover:bg-rosatierra-100 dark:hover:bg-slate-900 text-rosatierra-700">Ver Precios</a>
           </div>
           <div class="mt-6 flex items-center gap-4 text-xs text-rosatierra-600 dark:text-slate-400">
@@ -124,10 +140,10 @@
           </div>
         </div>
         <div>
-          <div class="relative p-1 rounded-2xl bg-gradient-to-tr from-rosatierra-200 to-rosatierra-300/60 dark:from-tierra-900/40 dark:to-rosatierra-600/20">
-            <div class="rounded-xl bg-white dark:bg-slate-900 overflow-hidden shadow-xl">
-              <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Aura by Jaz" class="w-full h-48 object-cover">
-              <div class="p-4 text-center">
+          <div class="relative p-1 rounded-2xl bg-gradient-to-tr from-rosatierra-200 to-rosatierra-300/60 dark:from-tierra-900/40 dark:to-rosatierra-600/20 max-w-sm mx-auto">
+            <div class="rounded-xl bg-white dark:bg-slate-900 overflow-hidden shadow-xl aspect-square">
+              <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Aura by Jaz" class="w-full h-3/4 object-cover">
+              <div class="p-4 text-center h-1/4 flex flex-col justify-center">
                 <h3 class="text-2xl font-semibold text-rosatierra-600 font-title">Vela Relax</h3>
                 <p class="text-sm text-rosatierra-600 dark:text-slate-300">Relajación y calma</p>
                 <p class="text-xl font-bold mt-2 text-rosatierra-700">$25.00</p>
@@ -318,6 +334,7 @@
             <label class="block text-sm font-medium text-rosatierra-700">Nombre</label>
             <input type="text" class="mt-1 w-full rounded-xl border border-rosatierra-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-rosatierra-500" placeholder="Tu nombre" />
           </div>
+        
           <div>
             <label class="block text-sm font-medium text-rosatierra-700">Email</label>
             <input type="email" class="mt-1 w-full rounded-xl border border-rosatierra-200 dark:border-slate-700 bg-transparent px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-rosatierra-500" placeholder="tucorreo@ejemplo.com" />
@@ -347,6 +364,76 @@
   </footer>
 
   <script>
+    // Cart functionality
+    let cart = [];
+    let cartCount = 0;
+
+    function updateCartCounter() {
+      const counter = document.getElementById('cartCount');
+      const cartElement = document.getElementById('cartCounter');
+      
+      counter.textContent = cartCount;
+      
+      if (cartCount > 0) {
+        cartElement.classList.remove('hidden');
+      } else {
+        cartElement.classList.add('hidden');
+      }
+    }
+
+    function showNotification(message = '¡Producto agregado al carrito!') {
+      const notification = document.getElementById('cartNotification');
+      const notificationText = notification.querySelector('p');
+      notificationText.textContent = message;
+      notification.classList.remove('hidden');
+      
+      setTimeout(() => {
+        notification.classList.add('hidden');
+      }, 3000);
+    }
+
+    function addToCart(productName, price) {
+      cart.push({ name: productName, price: price });
+      cartCount++;
+      updateCartCounter();
+      showNotification();
+      
+      console.log(`Producto agregado: ${productName} - ${price}`);
+      console.log('Carrito actual:', cart);
+    }
+
+    function clearCart() {
+      cart = [];
+      cartCount = 0;
+      updateCartCounter();
+      showNotification('¡Carrito vaciado!');
+      
+      console.log('Carrito vaciado');
+    }
+
+    // Add event listeners to all "Agregar al Carrito" buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      const addToCartButtons = document.querySelectorAll('button[class*="bg-rosatierra-600"]');
+      
+      addToCartButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+          const productCard = this.closest('article');
+          const productName = productCard.querySelector('h3').textContent;
+          const productPrice = productCard.querySelector('p[class*="font-bold"]').textContent;
+          
+          addToCart(productName, productPrice);
+        });
+      });
+
+      // Clear cart button event listener
+      const clearCartBtn = document.getElementById('clearCartBtn');
+      clearCartBtn.addEventListener('click', function() {
+        if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+          clearCart();
+        }
+      });
+    });
+
     // Toggle tema
     const btn = document.getElementById('themeToggle')
     btn?.addEventListener('click', () => {
