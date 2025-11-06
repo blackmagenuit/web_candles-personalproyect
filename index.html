@@ -356,18 +356,18 @@
         <form id="contactForm" action="https://formspree.io/f/xrboowqd" method="POST" class="mt-4 grid gap-4" aria-labelledby="contacto-title" novalidate>
           <div>
             <label for="nombre" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Nombre *</label>
-            <input type="text" id="nombre" name="name" required class="form-input mt-1" placeholder="Tu nombre" aria-describedby="nombre-error" />
-            <div id="nombre-error" class="sr-only" role="alert" aria-live="polite"></div>
+            <input type="text" id="nombre" name="name" required class="form-input mt-1" placeholder="Tu nombre" aria-describedby="nombre-error" minlength="2" maxlength="50" />
+            <div id="nombre-error" class="hidden mt-1 text-xs text-red-600 dark:text-red-400" role="alert" aria-live="polite">El nombre es obligatorio (mín. 2 caracteres)</div>
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Email *</label>
-            <input type="email" id="email" name="_replyto" required class="form-input mt-1" placeholder="tucorreo@ejemplo.com" aria-describedby="email-error" />
-            <div id="email-error" class="sr-only" role="alert" aria-live="polite"></div>
+            <label for="email" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Email * <span class="text-xs text-rosatierra-500">(Obligatorio)</span></label>
+            <input type="email" id="email" name="_replyto" required class="form-input mt-1" placeholder="tucorreo@ejemplo.com" aria-describedby="email-error" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingresa un email válido, por ejemplo: nombre@ejemplo.com" />
+            <div id="email-error" class="hidden mt-1 text-xs text-red-600 dark:text-red-400" role="alert" aria-live="polite">Por favor ingresa un email válido</div>
           </div>
           <div>
             <label for="mensaje" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Mensaje *</label>
-            <textarea rows="4" id="mensaje" name="message" required class="form-input mt-1" placeholder="Cuéntanos qué fragancias prefieres o si necesitas un pedido personalizado..." aria-describedby="mensaje-error"></textarea>
-            <div id="mensaje-error" class="sr-only" role="alert" aria-live="polite"></div>
+            <textarea rows="4" id="mensaje" name="message" required class="form-input mt-1" placeholder="Cuéntanos qué fragancias prefieres o si necesitas un pedido personalizado..." aria-describedby="mensaje-error" minlength="10" maxlength="1000"></textarea>
+            <div id="mensaje-error" class="hidden mt-1 text-xs text-red-600 dark:text-red-400" role="alert" aria-live="polite">El mensaje es obligatorio (mín. 10 caracteres)</div>
           </div>
           <!-- Hidden fields for Formspree -->
           <input type="hidden" name="_subject" value="Nueva consulta desde Aura by Jaz">
@@ -612,8 +612,92 @@
       const errorMessage = document.getElementById('errorMessage');
 
       if (contactForm) {
+        // Validación en tiempo real para el email (OBLIGATORIO)
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+        
+        emailInput.addEventListener('blur', function() {
+          const email = this.value.trim();
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          
+          if (!email) {
+            emailError.textContent = 'El email es obligatorio para poder responderte';
+            emailError.classList.remove('hidden');
+            this.classList.add('border-red-400');
+          } else if (!emailRegex.test(email)) {
+            emailError.textContent = 'Por favor ingresa un email válido (ej: nombre@ejemplo.com)';
+            emailError.classList.remove('hidden');
+            this.classList.add('border-red-400');
+          } else {
+            emailError.classList.add('hidden');
+            this.classList.remove('border-red-400');
+          }
+        });
+        
+        emailInput.addEventListener('input', function() {
+          const email = this.value.trim();
+          if (email && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            emailError.classList.add('hidden');
+            this.classList.remove('border-red-400');
+          }
+        });
+        
         contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
+          
+          // Validación personalizada obligatoria
+          const nombre = document.getElementById('nombre').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const mensaje = document.getElementById('mensaje').value.trim();
+          
+          // Reset error states
+          document.getElementById('nombre-error').classList.add('hidden');
+          document.getElementById('email-error').classList.add('hidden');
+          document.getElementById('mensaje-error').classList.add('hidden');
+          document.getElementById('nombre').classList.remove('border-red-400');
+          document.getElementById('email').classList.remove('border-red-400');
+          document.getElementById('mensaje').classList.remove('border-red-400');
+          
+          let hasErrors = false;
+          
+          // Validar nombre
+          if (!nombre || nombre.length < 2) {
+            document.getElementById('nombre-error').classList.remove('hidden');
+            document.getElementById('nombre').classList.add('border-red-400');
+            hasErrors = true;
+          }
+          
+          // Validar email (OBLIGATORIO)
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!email) {
+            document.getElementById('email-error').textContent = 'El email es obligatorio';
+            document.getElementById('email-error').classList.remove('hidden');
+            document.getElementById('email').classList.add('border-red-400');
+            hasErrors = true;
+          } else if (!emailRegex.test(email)) {
+            document.getElementById('email-error').textContent = 'Por favor ingresa un email válido';
+            document.getElementById('email-error').classList.remove('hidden');
+            document.getElementById('email').classList.add('border-red-400');
+            hasErrors = true;
+          }
+          
+          // Validar mensaje
+          if (!mensaje || mensaje.length < 10) {
+            document.getElementById('mensaje-error').classList.remove('hidden');
+            document.getElementById('mensaje').classList.add('border-red-400');
+            hasErrors = true;
+          }
+          
+          // Si hay errores, detener el envío
+          if (hasErrors) {
+            // Focus en el primer campo con error
+            const firstError = contactForm.querySelector('.border-red-400');
+            if (firstError) {
+              firstError.focus();
+              firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+          }
           
           // Show loading state
           submitBtn.disabled = true;

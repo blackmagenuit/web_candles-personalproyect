@@ -80,4 +80,18 @@
   .dark .backdrop-blur-brand {
     background-color: rgb(15 23 42 / 0.8);
   }
+  
+  /* Estados de error para formularios */
+  .border-red-400 {
+    border-color: #f87171 !important;
+  }
+  
+  .dark .border-red-400 {
+    border-color: #ef4444 !important;
+  }
+  
+  .border-red-400:focus {
+    --tw-ring-color: #ef4444;
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  }
 }
