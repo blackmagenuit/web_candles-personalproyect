@@ -10,48 +10,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
-  <!-- Tailwind CDN (modo play) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS Optimizado -->
+  <link href="./dist/output.css" rel="stylesheet">
+  <!-- Fallback CDN para desarrollo -->
   <script>
-    // Config Tailwind opcional
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { 
-            sans: ["Source Sans Pro", "ui-sans-serif", "system-ui"],
-            title: ["Playfair Display", "serif"],
-            elegant: ["Cormorant Garamond", "serif"]
-          },
-          colors: {
-            rosatierra: {
-              50:  "#f5f5f5", // Blanco grisáceo
-              100: "#ebd6d1", // Rosa pálido
-              200: "#d7c6b3", // Beige suave
-              300: "#d9b4ac", // Rosa viejo
-              400: "#c8988f", 
-              500: "#b67c72",
-              600: "#a56055",
-              700: "#934438",
-              800: "#82281b",
-              900: "#700c00"
+    // Verificar si el CSS personalizado se cargó, sino usar CDN
+    document.addEventListener('DOMContentLoaded', function() {
+      const testEl = document.createElement('div');
+      testEl.className = 'bg-rosatierra-500';
+      document.body.appendChild(testEl);
+      const styles = getComputedStyle(testEl);
+      if (!styles.backgroundColor || styles.backgroundColor === 'rgba(0, 0, 0, 0)') {
+        console.log('Cargando Tailwind CSS desde CDN como fallback...');
+        const script = document.createElement('script');
+        script.src = 'https://cdn.tailwindcss.com';
+        script.onload = function() {
+          tailwind.config = {
+            theme: {
+              extend: {
+                fontFamily: { 
+                  sans: ["Source Sans Pro", "ui-sans-serif", "system-ui"],
+                  title: ["Playfair Display", "serif"],
+                  elegant: ["Cormorant Garamond", "serif"]
+                },
+                colors: {
+                  rosatierra: {
+                    50:  "#f5f5f5",
+                    100: "#ebd6d1",
+                    200: "#d7c6b3",
+                    300: "#d9b4ac",
+                    400: "#c8988f", 
+                    500: "#b67c72",
+                    600: "#a56055",
+                    700: "#934438",
+                    800: "#82281b",
+                    900: "#700c00"
+                  },
+                  tierra: {
+                    50:  "#f5f5f5",
+                    100: "#ebd6d1",
+                    200: "#d7c6b3", 
+                    300: "#d9b4ac", 
+                    400: "#c8a195",
+                    500: "#b88a7e",
+                    600: "#a77367",
+                    700: "#965c50",
+                    800: "#854539",
+                    900: "#742e22"
+                  }
+                }
+              }
             },
-            tierra: {
-              50:  "#f5f5f5",
-              100: "#ebd6d1",
-              200: "#d7c6b3", 
-              300: "#d9b4ac", 
-              400: "#c8a195",
-              500: "#b88a7e",
-              600: "#a77367",
-              700: "#965c50",
-              800: "#854539",
-              900: "#742e22"
-            }
+            darkMode: 'class'
           }
-        }
-      },
-      darkMode: 'class'
-    }
+        };
+        document.head.appendChild(script);
+      }
+      document.body.removeChild(testEl);
+    });
   </script>
   <script>
     // modo claro/oscuro
@@ -69,39 +85,44 @@
   </style>
 </head>
 <body class="min-h-screen bg-rosatierra-50 text-rosatierra-800 dark:bg-slate-900 dark:text-slate-100 font-sans">
+  <!-- Skip to main content -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-rosatierra-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-rosatierra-500">
+    Ir al contenido principal
+  </a>
+  
   <!-- Header -->
   <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-rosatierra-50/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-rosatierra-100/60 dark:border-slate-700/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container-main">
       <div class="flex h-16 items-center justify-between">
         <a href="#" class="flex items-center gap-2 font-semibold tracking-tight text-xl font-title">
           <img src="img/LOGO_AURABYJAZ.png" alt="Aura by Jaz Logo" class="h-10 w-auto">
           <span>Aura by Jaz</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="#productos" class="hover:text-rosatierra-600 text-rosatierra-700">Productos</a>
-          <a href="#precios" class="hover:text-rosatierra-600 text-rosatierra-700">Precios</a>
-          <a href="#faq" class="hover:text-rosatierra-600 text-rosatierra-700">FAQ</a>
-          <a href="#contacto" class="hover:text-rosatierra-600 text-rosatierra-700">Contacto</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium" role="navigation" aria-label="Navegación principal">
+          <a href="#productos" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de productos">Productos</a>
+          <a href="#precios" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de precios">Precios</a>
+          <a href="#faq" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de preguntas frecuentes">FAQ</a>
+          <a href="#contacto" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de contacto">Contacto</a>
         </nav>
         <div class="flex items-center gap-3">
-          <button id="themeToggle" class="inline-flex items-center gap-2 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900">
-            <span class="i-sun hidden dark:inline">🌙</span>
-            <span class="i-moon inline dark:hidden">☀️</span>
+          <button id="themeToggle" class="inline-flex items-center gap-2 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-rosatierra-500" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+            <span class="i-sun hidden dark:inline" aria-hidden="true">🌙</span>
+            <span class="i-moon inline dark:hidden" aria-hidden="true">☀️</span>
             <span class="sr-only">Cambiar tema</span>
           </button>
           <!-- Cart Counter -->
-          <div id="cartCounter" class="hidden relative flex items-center gap-2">
-            <button id="cartToggle" class="inline-flex items-center gap-1 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900">
-              🛒 <span id="cartCount">0</span>
+          <div id="cartCounter" class="hidden relative items-center gap-2">
+            <button id="cartToggle" class="inline-flex items-center gap-1 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-rosatierra-500" aria-label="Abrir carrito de compras" aria-expanded="false" aria-describedby="cartCount">
+              <span aria-hidden="true">🛒</span> <span id="cartCount" aria-live="polite">0</span>
             </button>
-            <button id="clearCartBtn" class="inline-flex items-center gap-1 rounded-xl border border-red-300 dark:border-red-700 px-2 py-1 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
-              🗑️ Vaciar
+            <button id="clearCartBtn" class="inline-flex items-center gap-1 rounded-xl border border-red-300 dark:border-red-700 px-2 py-1 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-red-500" aria-label="Vaciar carrito de compras">
+              <span aria-hidden="true">🗑️</span> Vaciar
             </button>
             
             <!-- Cart Dropdown -->
-            <div id="cartDropdown" class="hidden absolute top-full right-0 mt-2 w-80 bg-white dark:bg-slate-950 border border-rosatierra-200 dark:border-slate-700 rounded-xl shadow-lg z-50">
+            <div id="cartDropdown" class="hidden absolute top-full right-0 mt-2 w-80 bg-white dark:bg-slate-950 border border-rosatierra-200 dark:border-slate-700 rounded-xl shadow-lg z-50" role="dialog" aria-labelledby="cartTitle" aria-hidden="true">
               <div class="p-4">
-                <h3 class="font-semibold text-lg mb-3 text-rosatierra-800 dark:text-slate-100">Carrito de Compras</h3>
+                <h3 id="cartTitle" class="font-semibold text-lg mb-3 text-rosatierra-800 dark:text-slate-100">Carrito de Compras</h3>
                 <div id="cartItems" class="space-y-2 max-h-60 overflow-y-auto">
                   <!-- Cart items will be inserted here -->
                 </div>
@@ -130,111 +151,113 @@
     </div>
   </div>
 
+  <!-- Main Content -->
+  <main id="main-content">
   <!-- Hero -->
-  <section class="relative bg-rosatierra-50 dark:bg-slate-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
-      <h1 class="text-5xl sm:text-6xl font-title font-semibold leading-tight text-rosatierra-800 dark:text-slate-100">
+  <section class="relative bg-rosatierra-50 dark:bg-slate-900" aria-labelledby="hero-title">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 section-padding py-28 text-center">
+      <h1 id="hero-title" class="text-5xl sm:text-6xl font-title font-semibold leading-tight text-rosatierra-800 dark:text-slate-100">
         Velas artesanales para momentos que importan
       </h1>
       <p class="mt-5 text-lg font-light text-rosatierra-700/90 dark:text-slate-300 max-w-2xl mx-auto font-elegant">
         Ceras naturales y fragancias premium. Diseñadas para acompañar tu ritual de calma.
       </p>
       <div class="mt-8 flex items-center justify-center gap-3">
-        <a href="#productos" class="inline-flex items-center rounded-xl bg-rosatierra-600 px-5 py-3 text-sm font-semibold text-white hover:bg-rosatierra-700 dark:bg-rosatierra-700 dark:hover:bg-rosatierra-800">Ver productos</a>
-        <a href="#contacto" class="inline-flex items-center rounded-xl border border-rosatierra-200 dark:border-slate-600 px-5 py-3 text-sm font-semibold hover:bg-rosatierra-100 dark:hover:bg-slate-800 text-rosatierra-700 dark:text-slate-300">Contactar</a>
+        <a href="#productos" class="btn-primary px-5 py-3">Ver productos</a>
+        <a href="#contacto" class="btn-secondary px-5 py-3">Contactar</a>
       </div>
     </div>
   </section>
 
 
   <!-- Productos -->
-  <section id="productos" class="py-16 sm:py-20 bg-white dark:bg-slate-950">
+  <section id="productos" class="py-16 sm:py-20 bg-white dark:bg-slate-950" aria-labelledby="productos-title">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-title font-semibold text-center mb-12 text-rosatierra-800 dark:text-slate-100">Nuestros Productos</h2>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <h2 id="productos-title" class="text-4xl font-title font-semibold text-center mb-12 text-rosatierra-800 dark:text-slate-100">Nuestros Productos</h2>
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6" role="list" aria-label="Lista de productos disponibles">
         <!-- Vela 1 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
-          <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
+        <article class="product-card" role="listitem" aria-labelledby="producto-1-title">
+          <img src="img/545270531_17854968003531051_4871331618368748410_n.jpg" alt="Vela aromática relajante Vela Relax en envase decorativo" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
-            <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Relax</h3>
+            <h3 id="producto-1-title" class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Relax</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Aromática relajante</p>
-            <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲185.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300" aria-label="Precio: 185.000 guaraníes">₲185.000</p>
+            <button class="btn-primary w-full mt-auto pt-3" aria-label="Agregar Vela Relax al carrito por 185.000 guaraníes">Agregar al Carrito</button>
           </div>
         </article>
         <!-- Vela 2 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/545365265_17855113215531051_4961248560403902871_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Energía</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Revitalizante</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲210.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
         <!-- Vela 3 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/547758411_17855354748531051_6656419321469229698_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Serenidad</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Paz interior</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲225.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
 
         <!-- Vela 4 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/548038925_17855330460531051_9195035416595380747_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Amor</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Romance y pasión</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲240.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
 
         <!-- Vela 5 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/548545921_17855376558531051_6872042298536463752_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Abundancia</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Prosperidad</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲260.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
 
         <!-- Vela 6 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/551869002_17856317652531051_6553706410933271805_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Protección</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Energía protectora</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲225.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
 
         <!-- Vela 7 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/553726112_17856487059531051_2428140240481272521_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Equilibrio</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Armonía total</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲210.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
 
         <!-- Vela 8 -->
-        <article class="rounded-2xl border border-rosatierra-100 dark:border-slate-800 overflow-hidden shadow-sm bg-white dark:bg-slate-950 flex flex-col">
+        <article class="product-card">
           <img src="img/560103923_17858193582531051_8352812995069567662_n.jpg" alt="Vela Artesanal" class="w-full h-48 object-cover">
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="font-title font-medium text-xl text-rosatierra-700 dark:text-slate-200 h-14 flex items-center">Vela Inspiración</h3>
             <p class="text-sm text-rosatierra-600 dark:text-slate-300 font-light h-10 flex items-center">Creatividad pura</p>
             <p class="text-rosatierra-600 font-semibold mt-2 dark:text-slate-300">₲245.000</p>
-            <button class="w-full mt-auto pt-3 bg-rosatierra-600 text-white py-3 px-4 rounded-xl hover:bg-rosatierra-700 transition-colors font-semibold text-sm">Agregar al Carrito</button>
+            <button class="btn-primary w-full mt-auto pt-3">Agregar al Carrito</button>
           </div>
         </article>
       </div>
@@ -256,7 +279,7 @@
             <li>✔️ 40+ horas de duración</li>
             <li>✔️ Con costo adicional dependiendo de la Zona</li>
           </ul>
-          <button onclick="addPackageToCart('Box Sorpresa', '₲130.000')" class="mt-6 inline-flex w-full justify-center rounded-xl bg-rosatierra-600 hover:bg-rosatierra-700 px-4 py-3 text-sm font-semibold text-white transition-colors">Comprar</button>
+          <button onclick="addPackageToCart('Box Sorpresa', '₲130.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
         </div>
         <!-- Box Trio -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-700 p-6 shadow-sm bg-white dark:bg-slate-950 flex flex-col">
@@ -268,7 +291,7 @@
             <li>✔️ Fragancias premium</li>
             <li>✔️ Caja de regalo incluida</li>
           </ul>
-          <button onclick="addPackageToCart('Box Trio', '₲290.000')" class="mt-6 inline-flex w-full justify-center rounded-xl bg-rosatierra-600 hover:bg-rosatierra-700 px-4 py-3 text-sm font-semibold text-white transition-colors">Comprar</button>
+          <button onclick="addPackageToCart('Box Trio', '₲290.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
         </div>
         <!-- Colección Premium -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-700 p-6 shadow-sm bg-white dark:bg-slate-950 flex flex-col">
@@ -280,7 +303,7 @@
             <li>✔️ Portavelas de cemento polimérico</li>
             <li>✔️ Accesorios premium</li>
           </ul>
-          <button onclick="addPackageToCart('Colección Premium', '₲630.000')" class="mt-6 inline-flex w-full justify-center rounded-xl bg-rosatierra-600 hover:bg-rosatierra-700 px-4 py-3 text-sm font-semibold text-white transition-colors">Comprar</button>
+          <button onclick="addPackageToCart('Colección Premium', '₲630.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
         </div>
       </div>
     </div>
@@ -314,10 +337,10 @@
   </section>
 
   <!-- Contacto -->
-  <section id="contacto" class="py-16 sm:py-20 bg-rosatierra-100 dark:bg-slate-800">
+  <section id="contacto" class="py-16 sm:py-20 bg-rosatierra-100 dark:bg-slate-800" aria-labelledby="contacto-title">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-700 p-6 bg-white dark:bg-slate-950">
-        <h2 class="text-2xl font-title font-semibold text-rosatierra-800 dark:text-slate-100">¿Tienes alguna pregunta?</h2>
+        <h2 id="contacto-title" class="text-2xl font-title font-semibold text-rosatierra-800 dark:text-slate-100">¿Tienes alguna pregunta?</h2>
         <p class="text-sm text-rosatierra-600 dark:text-slate-400 mt-2 font-light">Contáctanos para pedidos personalizados o consultas sobre nuestros productos.</p>
         
         <!-- Success Message -->
@@ -330,23 +353,26 @@
           <p class="text-sm font-medium">Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.</p>
         </div>
 
-        <form id="contactForm" action="https://formspree.io/f/xrboowqd" method="POST" class="mt-4 grid gap-4">
+        <form id="contactForm" action="https://formspree.io/f/xrboowqd" method="POST" class="mt-4 grid gap-4" aria-labelledby="contacto-title" novalidate>
           <div>
-            <label class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Nombre *</label>
-            <input type="text" name="name" required class="mt-1 w-full rounded-xl border border-rosatierra-200 dark:border-slate-600 bg-transparent dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-rosatierra-500 dark:text-slate-100" placeholder="Tu nombre" />
+            <label for="nombre" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Nombre *</label>
+            <input type="text" id="nombre" name="name" required class="form-input mt-1" placeholder="Tu nombre" aria-describedby="nombre-error" />
+            <div id="nombre-error" class="sr-only" role="alert" aria-live="polite"></div>
           </div>
           <div>
-            <label class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Email *</label>
-            <input type="email" name="_replyto" required class="mt-1 w-full rounded-xl border border-rosatierra-200 dark:border-slate-600 bg-transparent dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-rosatierra-500 dark:text-slate-100" placeholder="tucorreo@ejemplo.com" />
+            <label for="email" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Email *</label>
+            <input type="email" id="email" name="_replyto" required class="form-input mt-1" placeholder="tucorreo@ejemplo.com" aria-describedby="email-error" />
+            <div id="email-error" class="sr-only" role="alert" aria-live="polite"></div>
           </div>
           <div>
-            <label class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Mensaje *</label>
-            <textarea rows="4" name="message" required class="mt-1 w-full rounded-xl border border-rosatierra-200 dark:border-slate-600 bg-transparent dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-rosatierra-500 dark:text-slate-100" placeholder="Cuéntanos qué fragancias prefieres o si necesitas un pedido personalizado..."></textarea>
+            <label for="mensaje" class="block text-sm font-medium text-rosatierra-700 dark:text-slate-300">Mensaje *</label>
+            <textarea rows="4" id="mensaje" name="message" required class="form-input mt-1" placeholder="Cuéntanos qué fragancias prefieres o si necesitas un pedido personalizado..." aria-describedby="mensaje-error"></textarea>
+            <div id="mensaje-error" class="sr-only" role="alert" aria-live="polite"></div>
           </div>
           <!-- Hidden fields for Formspree -->
           <input type="hidden" name="_subject" value="Nueva consulta desde Aura by Jaz">
           
-          <button type="submit" id="submitBtn" class="inline-flex justify-center items-center rounded-xl bg-rosatierra-600 px-4 py-3 text-sm font-semibold text-white hover:bg-rosatierra-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          <button type="submit" id="submitBtn" class="btn-primary justify-center items-center">
             <span id="submitText">Enviar</span>
             <svg id="loadingSpinner" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -357,6 +383,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer class="py-10 bg-white dark:bg-slate-950">
@@ -401,8 +428,10 @@
       
       if (cartCount > 0) {
         cartElement.classList.remove('hidden');
+        cartElement.classList.add('flex');
       } else {
         cartElement.classList.add('hidden');
+        cartElement.classList.remove('flex');
       }
     }
 
@@ -508,7 +537,7 @@
       // Load cart from storage on page load
       loadCartFromStorage();
 
-      const addToCartButtons = document.querySelectorAll('article button[class*="bg-rosatierra-600"]');
+      const addToCartButtons = document.querySelectorAll('article button.btn-primary');
       
       addToCartButtons.forEach((button, index) => {
         button.addEventListener('click', function() {
@@ -534,12 +563,36 @@
       
       cartToggle.addEventListener('click', function(e) {
         e.stopPropagation();
-        cartDropdown.classList.toggle('hidden');
+        const isHidden = cartDropdown.classList.toggle('hidden');
+        // Update ARIA attributes for accessibility
+        cartToggle.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+        cartDropdown.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+        
+        // Focus management
+        if (!isHidden) {
+          // Focus first focusable element in dropdown
+          const firstButton = cartDropdown.querySelector('button');
+          if (firstButton) {
+            setTimeout(() => firstButton.focus(), 100);
+          }
+        }
       });
 
-      // Close dropdown when clicking outside
+      // Close dropdown when clicking outside or pressing Escape
       document.addEventListener('click', function() {
         cartDropdown.classList.add('hidden');
+        cartToggle.setAttribute('aria-expanded', 'false');
+        cartDropdown.setAttribute('aria-hidden', 'true');
+      });
+      
+      // Keyboard navigation for cart
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !cartDropdown.classList.contains('hidden')) {
+          cartDropdown.classList.add('hidden');
+          cartToggle.setAttribute('aria-expanded', 'false');
+          cartDropdown.setAttribute('aria-hidden', 'true');
+          cartToggle.focus();
+        }
       });
 
       // Prevent dropdown from closing when clicking inside it

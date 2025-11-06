@@ -1,0 +1,32 @@
+{
+  "name": "aura-by-jaz-candles",
+  "version": "1.0.0",
+  "description": "Sitio web de velas artesanales Aura by Jaz - Diseñado con Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build-prod": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev": "live-server --port=3000 --open=/index.html",
+    "preview": "live-server --port=3001 --open=/index.html"
+  },
+  "keywords": [
+    "velas",
+    "candles",
+    "artesanales",
+    "tailwind",
+    "ecommerce"
+  ],
+  "author": "blackmagenuit",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackmagenuit/web_candles-personalproyect.git"
+  },
+  "homepage": "https://blackmagenuit.github.io/web_candles-personalproyect/"
+}
