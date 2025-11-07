@@ -143,7 +143,6 @@
               </div>
             </div>
           </div>
-          <a href="#productos" class="hidden sm:inline-flex items-center rounded-xl bg-rosatierra-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500">Comprar</a>
         </div>
       </div>
     </div>
@@ -293,7 +292,7 @@
             <li>✔️ 40+ horas de duración</li>
             <li>✔️ Con costo adicional dependiendo de la Zona</li>
           </ul>
-          <button onclick="addPackageToCart('Box Sorpresa', '₲130.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
+          <button onclick="addPackageToCart('Box Sorpresa', '₲130.000')" class="btn-primary w-full justify-center mt-6">Finalizar Compra</button>
         </div>
         <!-- Box Trio -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-700 p-6 shadow-sm bg-white dark:bg-slate-950 flex flex-col">
@@ -305,7 +304,7 @@
             <li>✔️ Fragancias premium</li>
             <li>✔️ Caja de regalo incluida</li>
           </ul>
-          <button onclick="addPackageToCart('Box Trio', '₲290.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
+          <button onclick="addPackageToCart('Box Trio', '₲290.000')" class="btn-primary w-full justify-center mt-6">Finalizar Compra</button>
         </div>
         <!-- Colección Premium -->
         <div class="rounded-2xl border border-rosatierra-200 dark:border-slate-700 p-6 shadow-sm bg-white dark:bg-slate-950 flex flex-col">
@@ -317,7 +316,7 @@
             <li>✔️ Portavelas de cemento polimérico</li>
             <li>✔️ Accesorios premium</li>
           </ul>
-          <button onclick="addPackageToCart('Colección Premium', '₲630.000')" class="btn-primary w-full justify-center mt-6">Comprar</button>
+          <button onclick="addPackageToCart('Colección Premium', '₲630.000')" class="btn-primary w-full justify-center mt-6">Finalizar Compra</button>
         </div>
       </div>
     </div>
@@ -525,6 +524,11 @@
       
       console.log(`Paquete agregado: ${packageName} - ${price}`);
       console.log('Carrito actual:', cart);
+      
+      // Redirigir automáticamente a la página de pagos después de un breve delay
+      setTimeout(() => {
+        window.location.href = 'pagos.html';
+      }, 1500);
     }
 
     function removeFromCart(index) {
