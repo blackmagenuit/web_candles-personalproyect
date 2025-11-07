@@ -7,10 +7,11 @@ Sitio web de velas aromáticas artesanales con carrito de compras integrado y mo
 - 🎨 **Diseño elegante** con Tailwind CSS
 - 🌙 **Modo oscuro/claro** automático
 - 🛒 **Carrito de compras** funcional con localStorage
-- 📱 **Totalmente responsive** 
+- � **Página de medios de pago** integrada
+- �📱 **Totalmente responsive** 
 - ♿ **Accesible** con navegación por teclado
 - 🚀 **Optimizado** para producción
-- 📧 **Formulario de contacto** con Formspree
+- 📧 **Formulario de contacto** con validación robusta
 
 ## 🚀 Demo en Vivo
 
@@ -55,6 +56,7 @@ npm run build-prod
 
 ```
 ├── index.html              # Página principal
+├── pagos.html              # Página de medios de pago
 ├── tailwind.config.js      # Configuración de Tailwind
 ├── package.json           # Dependencias y scripts
 ├── src/
@@ -92,6 +94,16 @@ En `src/input.css` encontrarás clases como:
 - ✅ Contador dinámico
 - ✅ Cálculo de totales
 - ✅ Notificaciones visuales
+- ✅ Botón flotante "Finalizar Compra"
+- ✅ Redirección a página de pagos
+
+### Página de Medios de Pago
+- ✅ Resumen del pedido desde localStorage
+- ✅ Múltiples opciones de pago
+- ✅ Información bancaria completa
+- ✅ Instrucciones detalladas
+- ✅ Enlaces directos a WhatsApp
+- ✅ Diseño responsivo y accesible
 
 ### Formulario de Contacto
 - ✅ Validación HTML5

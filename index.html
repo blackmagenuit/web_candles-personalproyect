@@ -130,9 +130,14 @@
                   El carrito está vacío
                 </div>
                 <div id="cartTotal" class="hidden mt-3 pt-3 border-t border-rosatierra-200 dark:border-slate-700">
-                  <div class="flex justify-between items-center font-semibold">
+                  <div class="flex justify-between items-center font-semibold mb-3">
                     <span>Total:</span>
                     <span id="totalAmount">₲0</span>
+                  </div>
+                  <div class="flex gap-2">
+                    <a href="pagos.html" class="btn-primary flex-1 justify-center text-sm py-2" aria-label="Ir a la página de medios de pago">
+                      💳 Ir a Pagar
+                    </a>
                   </div>
                 </div>
               </div>
@@ -149,6 +154,15 @@
     <div class="bg-rosatierra-600 text-white px-4 py-2 rounded-xl shadow-lg">
       <p class="text-sm font-semibold">¡Producto agregado al carrito!</p>
     </div>
+  </div>
+
+  <!-- Floating Payment Button -->
+  <div id="floatingPaymentBtn" class="fixed bottom-6 right-6 z-50 hidden">
+    <a href="pagos.html" class="btn-primary px-6 py-4 text-base shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse" aria-label="Ver medios de pago para finalizar compra">
+      <span class="mr-2">💳</span>
+      <span class="font-semibold">Finalizar Compra</span>
+      <span id="floatingCartCount" class="ml-2 bg-white text-rosatierra-600 text-xs font-bold px-2 py-1 rounded-full">0</span>
+    </a>
   </div>
 
   <!-- Main Content -->
@@ -423,15 +437,20 @@
     function updateCartCounter() {
       const counter = document.getElementById('cartCount');
       const cartElement = document.getElementById('cartCounter');
+      const floatingBtn = document.getElementById('floatingPaymentBtn');
+      const floatingCount = document.getElementById('floatingCartCount');
       
       counter.textContent = cartCount;
+      if (floatingCount) floatingCount.textContent = cartCount;
       
       if (cartCount > 0) {
         cartElement.classList.remove('hidden');
         cartElement.classList.add('flex');
+        if (floatingBtn) floatingBtn.classList.remove('hidden');
       } else {
         cartElement.classList.add('hidden');
         cartElement.classList.remove('flex');
+        if (floatingBtn) floatingBtn.classList.add('hidden');
       }
     }
 

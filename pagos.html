@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es" class="h-full scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medios de Pago - Aura by Jaz</title>
+  <meta name="description" content="Métodos de pago disponibles para tus velas artesanales - Transferencia bancaria, efectivo y más opciones." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS Optimizado -->
+  <link href="./dist/output.css" rel="stylesheet">
+  <!-- Fallback CDN para desarrollo -->
+  <script>
+    // Verificar si el CSS personalizado se cargó, sino usar CDN
+    document.addEventListener('DOMContentLoaded', function() {
+      const testEl = document.createElement('div');
+      testEl.className = 'bg-rosatierra-500';
+      document.body.appendChild(testEl);
+      const styles = getComputedStyle(testEl);
+      if (!styles.backgroundColor || styles.backgroundColor === 'rgba(0, 0, 0, 0)') {
+        console.log('Cargando Tailwind CSS desde CDN como fallback...');
+        const script = document.createElement('script');
+        script.src = 'https://cdn.tailwindcss.com';
+        script.onload = function() {
+          tailwind.config = {
+            theme: {
+              extend: {
+                fontFamily: { 
+                  sans: ["Source Sans Pro", "ui-sans-serif", "system-ui"],
+                  title: ["Playfair Display", "serif"],
+                  elegant: ["Cormorant Garamond", "serif"]
+                },
+                colors: {
+                  rosatierra: {
+                    50:  "#f5f5f5",
+                    100: "#ebd6d1",
+                    200: "#d7c6b3",
+                    300: "#d9b4ac",
+                    400: "#c8988f", 
+                    500: "#b67c72",
+                    600: "#a56055",
+                    700: "#934438",
+                    800: "#82281b",
+                    900: "#700c00"
+                  },
+                  tierra: {
+                    50:  "#f5f5f5",
+                    100: "#ebd6d1",
+                    200: "#d7c6b3", 
+                    300: "#d9b4ac", 
+                    400: "#c8a195",
+                    500: "#b88a7e",
+                    600: "#a77367",
+                    700: "#965c50",
+                    800: "#854539",
+                    900: "#742e22"
+                  }
+                }
+              }
+            },
+            darkMode: 'class'
+          }
+        };
+        document.head.appendChild(script);
+      }
+      document.body.removeChild(testEl);
+    });
+  </script>
+  <script>
+    // modo claro/oscuro
+    const themeStorageKey = 'theme:color-scheme'
+    const saved = localStorage.getItem(themeStorageKey)
+    if (saved === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+  <style>
+    /* Suaviza el scroll y selection */
+    ::selection { background: #d9b4ac22; }
+  </style>
+</head>
+<body class="min-h-screen bg-rosatierra-50 text-rosatierra-800 dark:bg-slate-900 dark:text-slate-100 font-sans">
+  <!-- Skip to main content -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-rosatierra-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-rosatierra-500">
+    Ir al contenido principal
+  </a>
+  
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-rosatierra-50/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-rosatierra-100/60 dark:border-slate-700/60">
+    <div class="container-main">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 font-semibold tracking-tight text-xl font-title">
+          <img src="img/LOGO_AURABYJAZ.png" alt="Aura by Jaz Logo" class="h-10 w-auto">
+          <span>Aura by Jaz</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium" role="navigation" aria-label="Navegación principal">
+          <a href="index.html#productos" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de productos">Productos</a>
+          <a href="index.html#precios" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de precios">Precios</a>
+          <a href="index.html#contacto" class="hover:text-rosatierra-600 text-rosatierra-700 focus:outline-none focus:ring-2 focus:ring-rosatierra-500 rounded-md px-2 py-1" aria-label="Ir a la sección de contacto">Contacto</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="inline-flex items-center gap-2 rounded-xl border border-rosatierra-200 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-rosatierra-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-rosatierra-500" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+            <span class="i-sun hidden dark:inline" aria-hidden="true">🌙</span>
+            <span class="i-moon inline dark:hidden" aria-hidden="true">☀️</span>
+            <span class="sr-only">Cambiar tema</span>
+          </button>
+          <a href="index.html" class="btn-secondary px-3 py-2 text-sm">← Volver</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="relative bg-rosatierra-50 dark:bg-slate-900" aria-labelledby="payment-title">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 section-padding py-16 text-center">
+        <h1 id="payment-title" class="text-4xl sm:text-5xl font-title font-semibold leading-tight text-rosatierra-800 dark:text-slate-100">
+          Medios de Pago
+        </h1>
+        <p class="mt-5 text-lg font-light text-rosatierra-700/90 dark:text-slate-300 max-w-2xl mx-auto font-elegant">
+          Elige el método de pago que más te convenga para recibir tus velas artesanales
+        </p>
+      </div>
+    </section>
+
+    <!-- Carrito Resumen -->
+    <section class="py-8 bg-white dark:bg-slate-950 border-b border-rosatierra-100 dark:border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-rosatierra-50 dark:bg-slate-800 rounded-2xl p-6">
+          <h2 class="text-xl font-title font-semibold text-rosatierra-800 dark:text-slate-100 mb-4">Resumen de tu Pedido</h2>
+          <div id="paymentCartItems" class="space-y-3">
+            <!-- Items del carrito se cargarán aquí -->
+          </div>
+          <div id="paymentCartEmpty" class="text-center py-8 text-slate-500 dark:text-slate-400">
+            <p>No hay productos en el carrito</p>
+            <a href="index.html#productos" class="btn-primary mt-4 inline-flex">Ver Productos</a>
+          </div>
+          <div id="paymentCartTotal" class="hidden mt-6 pt-4 border-t border-rosatierra-200 dark:border-slate-700">
+            <div class="flex justify-between items-center">
+              <span class="text-lg font-semibold text-rosatierra-800 dark:text-slate-100">Total:</span>
+              <span id="paymentTotalAmount" class="text-2xl font-bold text-rosatierra-700 dark:text-slate-200">₲0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Métodos de Pago -->
+    <section class="py-16 bg-white dark:bg-slate-950">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-title font-semibold text-center mb-12 text-rosatierra-800 dark:text-slate-100">Métodos de Pago Disponibles</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Transferencia Bancaria -->
+          <div class="bg-gradient-to-br from-rosatierra-50 to-rosatierra-100 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 border border-rosatierra-200 dark:border-slate-700">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-rosatierra-600 rounded-xl flex items-center justify-center text-white text-xl">
+                🏦
+              </div>
+              <div>
+                <h3 class="text-xl font-title font-semibold text-rosatierra-800 dark:text-slate-100">Transferencia Bancaria</h3>
+                <p class="text-sm text-rosatierra-600 dark:text-slate-400">Recomendado - Sin comisiones</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="bg-white dark:bg-slate-950 rounded-lg p-4 border border-rosatierra-200 dark:border-slate-600">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-semibold text-rosatierra-700 dark:text-slate-200">Banco Atlas</h4>
+                  <div class="bg-white rounded-lg p-2 shadow-sm border border-gray-200">
+                    <img src="img/Logobancoatlas.png" alt="Banco Atlas" class="h-8 w-auto object-contain" style="max-width: 80px;">
+                  </div>
+                </div>
+              
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-rosatierra-600 dark:text-slate-400">Titular:</span>
+                    <span class="font-medium text-rosatierra-800 dark:text-slate-200">Jazmin Caballero</span>
+
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-rosatierra-600 dark:text-slate-400">Cédula:</span>
+                    <span class="font-mono text-rosatierra-800 dark:text-slate-200">4.350.231</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-rosatierra-600 dark:text-slate-400">Cuenta:</span>
+                    <span class="font-mono text-rosatierra-800 dark:text-slate-200">975158</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-medium text-rosatierra-800 dark:text-slate-200">Alias:</span>
+                    <span class="font-mono text-rosatierra-800 dark:text-slate-200">4.350.231</span>
+                  </div>
+                </div>
+              </div>
+              
+           
+            
+              <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <div class="flex items-start gap-2">
+                  <span class="text-blue-600 dark:text-blue-400 text-lg">ℹ️</span>
+                  <div class="text-sm text-blue-700 dark:text-blue-300">
+                    <p class="font-medium mb-1">Instrucciones:</p>
+                    <ul class="space-y-1 text-xs">
+                      <li>• Realiza la transferencia por el monto total</li>
+                      <li>• Envía el comprobante por WhatsApp</li>
+                      <li>• Incluye tu nombre y productos pedidos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            &nbsp;
+          <!-- Efectivo -->
+          <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-2xl p-6 border border-green-200 dark:border-green-800">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center text-white text-xl">
+                💵
+              </div>
+              <div>
+                <h3 class="text-xl font-title font-semibold text-green-800 dark:text-green-200">Efectivo</h3>
+                <p class="text-sm text-green-600 dark:text-green-400">Al momento de la entrega</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="bg-white dark:bg-slate-950 rounded-lg p-4 border border-green-200 dark:border-green-700">
+                <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">Modalidades disponibles:</h4>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-center gap-2">
+                    <span class="text-green-600 dark:text-green-400">✓</span>
+                    <span class="text-green-800 dark:text-green-200">Entrega a domicilio</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-green-600 dark:text-green-400">✓</span>
+                    <span class="text-green-800 dark:text-green-200">Retiro del local</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                <div class="flex items-start gap-2">
+                  <span class="text-yellow-600 dark:text-yellow-400 text-lg">⚠️</span>
+                  <div class="text-sm text-yellow-700 dark:text-yellow-300">
+                    <p class="font-medium mb-1">Importante:</p>
+                    <p class="text-xs">Ten el monto exacto preparado para facilitar la transacción.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="mt-12 text-center space-y-4">
+          <div class="bg-rosatierra-50 dark:bg-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-title font-semibold text-rosatierra-800 dark:text-slate-100 mb-3">¿Listo para confirmar tu pedido?</h3>
+            <p class="text-sm text-rosatierra-600 dark:text-slate-400 mb-6">Contactanos por WhatsApp con el método de pago elegido</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="https://wa.me/595994266416?text=Hola! Quiero realizar un pedido de velas Aura by Jaz" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="btn-primary px-6 py-3 text-base">
+                <span class="mr-2">📱</span>
+                Confirmar por WhatsApp
+              </a>
+              
+              <a href="index.html#contacto" class="btn-secondary px-6 py-3 text-base">
+                Escribir por el formulario
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-10 bg-white dark:bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-rosatierra-600 dark:text-slate-400">
+        <p>© <span id="year"></span> <a href="https://github.com/blackmagenuit" class="hover:text-rosatierra-700 dark:hover:text-slate-300" target="_blank" rel="noopener noreferrer">blackmagenuit</a>. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-4">
+          <a class="hover:text-rosatierra-700 dark:hover:text-slate-300" href="#">Términos</a>
+          <a class="hover:text-rosatierra-700 dark:hover:text-slate-300" href="#">Privacidad</a>
+          <a class="hover:text-rosatierra-700 dark:hover:text-slate-300" href="#">Soporte</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Load cart from localStorage and display in payment page
+    function loadCartForPayment() {
+      const savedCart = localStorage.getItem('aura-cart');
+      const cartItems = document.getElementById('paymentCartItems');
+      const cartEmpty = document.getElementById('paymentCartEmpty');
+      const cartTotal = document.getElementById('paymentCartTotal');
+      const totalAmount = document.getElementById('paymentTotalAmount');
+
+      if (savedCart && JSON.parse(savedCart).length > 0) {
+        const cart = JSON.parse(savedCart);
+        cartEmpty.classList.add('hidden');
+        cartTotal.classList.remove('hidden');
+
+        let total = 0;
+        cartItems.innerHTML = cart.map(item => {
+          const price = parseFloat(item.price.replace('₲', '').replace(/\./g, ''));
+          total += price;
+          
+          return `
+            <div class="flex justify-between items-center py-3 px-4 bg-white dark:bg-slate-950 rounded-lg border border-rosatierra-200 dark:border-slate-700">
+              <div class="flex-1">
+                <h4 class="font-medium text-rosatierra-800 dark:text-slate-200">${item.name}</h4>
+                <p class="text-sm text-rosatierra-600 dark:text-slate-400">${item.price}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        totalAmount.textContent = `₲${total.toLocaleString()}`;
+      } else {
+        cartEmpty.classList.remove('hidden');
+        cartTotal.classList.add('hidden');
+      }
+    }
+
+    // Toggle tema
+    const btn = document.getElementById('themeToggle')
+    btn?.addEventListener('click', () => {
+      const root = document.documentElement
+      const isDark = root.classList.toggle('dark')
+      localStorage.setItem('theme:color-scheme', isDark ? 'dark' : 'light')
+    })
+
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear()
+
+    // Load cart on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCartForPayment();
+    });
+  </script>
+</body>
+</html>
